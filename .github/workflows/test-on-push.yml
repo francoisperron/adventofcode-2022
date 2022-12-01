@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Advent of code 2022
 
 on:
   push:
