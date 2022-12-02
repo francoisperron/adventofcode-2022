@@ -1,6 +1,6 @@
 https://adventofcode.com
 
-![](https://github.com/francoisperron/adventofcode-2022/actions/workflows/test-on-push.yml/badge.svg)
+![badge](https://github.com/francoisperron/adventofcode-2022/actions/workflows/test-on-push.yml/badge.svg)
 
 #### Run
     npm i
