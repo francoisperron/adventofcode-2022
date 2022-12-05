@@ -1,13 +1,12 @@
 import { descending, sum } from '../array.js'
-import { dailyInputLines } from '../dailyInput.js'
+import { dailyInput } from '../dailyInput.js'
 
 describe('Day 1: Calorie Counting', () => {
-  const example = '1000\n2000\n3000\n\n4000\n\n5000\n6000\n\n7000\n8000\n9000\n\n10000\n'.split('\n')
+  const example = '1000\n2000\n3000\n\n4000\n\n5000\n6000\n\n7000\n8000\n9000\n\n10000'
   let input
 
   beforeEach(async () => {
-    input = await dailyInputLines(1)
-    input.push('')
+    input = await dailyInput(1)
   })
 
   describe('Part 1: Find the Elf carrying the most Calories. How many total Calories is that Elf carrying?', () => {
@@ -30,18 +29,11 @@ describe('Day 1: Calorie Counting', () => {
   })
 })
 
-const maxCalories = (input, elfCount = 1) => {
-  let calories = []
-  let current = 0
-
-  for (const i of input) {
-    if (i === '') {
-      calories.push(current)
-      current = 0
-    } else {
-      current += parseInt(i)
-    }
-  }
-
-  return calories.sort(descending).slice(0, elfCount).reduce(sum, 0)
-}
+const maxCalories = (input, elfCount = 1) => input
+  .split('\n\n')
+  .map(food => food.split('\n'))
+  .map(food => food.map(item => parseInt(item)))
+  .map(food => food.reduce(sum))
+  .sort(descending)
+  .slice(0, elfCount)
+  .reduce(sum)

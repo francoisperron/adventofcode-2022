@@ -1,5 +1,6 @@
 import { sum } from '../array.js'
 import { dailyInputLines } from '../dailyInput.js'
+import { objectKeyByValue } from '../object.js'
 
 describe('Day 02: Rock Paper Scissors', () => {
   const example = 'A Y\nB X\nC Z'.split('\n')
@@ -73,11 +74,8 @@ const parseOpponentHand = h => h === 'A' ? hand.rock : h === 'B' ? hand.paper : 
 const parseMyHand = h => h === 'X' ? hand.rock : h === 'Y' ? hand.paper : hand.scissors
 const parseRoundEnd = r => r === 'X' ? round.loose : r === 'Y' ? round.draw : round.win
 
-const figureOutMyHand = (opponentHand, roundEnd) => {
-  if (roundEnd === round.draw) return opponentHand
-  if (roundEnd === round.loose) return handDefeatTable[opponentHand]
-  return Object.keys(handDefeatTable).find(key => handDefeatTable[key] === opponentHand)
-}
+const figureOutMyHand = (opponentHand, roundEnd) => roundEnd === round.draw ? opponentHand
+  : roundEnd === round.loose ? handDefeatTable[opponentHand] : objectKeyByValue(handDefeatTable, opponentHand)
 
 const rockPaperScissorsRoundScore = (opponentHand, myHand) => myScore(myHand) + outcomeScore(opponentHand, myHand)
 const myScore = (myHand) => myHand === hand.rock ? 1 : myHand === hand.paper ? 2 : 3

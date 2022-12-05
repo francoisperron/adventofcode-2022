@@ -1,4 +1,4 @@
-import { sum } from '../array.js'
+import { groupBy, sum } from '../array.js'
 import { dailyInputLines } from '../dailyInput.js'
 
 describe('Day 3: Rucksack Reorganization', () => {
@@ -94,6 +94,5 @@ const commonItemIn = group => group
   .reduce((a, b) => a.filter(c => b.includes(c)))
   .pop()
 
-const groupBy3 = input => input
-  .reduce((groups, rucksack, index) => (index % 3 ? groups[groups.length - 1].push(rucksack) : groups.push([rucksack])) && groups, [])
+const groupBy3 = input => input.reduce((g, v, i) => groupBy(g, v, i)((g, v, i) => i % 3), [])
 
