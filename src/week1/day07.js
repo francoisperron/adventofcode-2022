@@ -10,7 +10,7 @@ export const parseCommand = (command, state) => {
   const args = command.split(' ')
 
   if (args[0] === '$') {
-    const currentDirectory = cd(args[2], state)
+    const currentDirectory = cd(args[2], state.currentDirectory)
     if (state.fs.some(i => i.name === currentDirectory)) {
       return { currentDirectory: currentDirectory, fs: state.fs }
     } else {
@@ -21,11 +21,11 @@ export const parseCommand = (command, state) => {
   }
 }
 
-const cd = (param, state) => {
-  if (param === '..') return state.currentDirectory.substring(0, state.currentDirectory.lastIndexOf('/')) || '/'
+const cd = (param, currentDirectory) => {
+  if (param === '..') return currentDirectory.substring(0, currentDirectory.lastIndexOf('/')) || '/'
   else if (param === '/') return param
-  else if (state.currentDirectory === '/') return `/${param}`
-  else return `${state.currentDirectory}/${param}`
+  else if (currentDirectory === '/') return `/${param}`
+  else return `${currentDirectory}/${param}`
 }
 
 export const sizeOfDirectory = (dir, fs) => fs

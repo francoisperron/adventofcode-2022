@@ -98,10 +98,11 @@ describe('Day 7: No Space Left On Device', () => {
     it('solves example', () => {
       const fs = parseCommands(example)
       const usedSpace = fs.filter(i => i.type === 'dir').map(dir => sizeOfDirectory(dir.name, fs)).reduce(max)
+      const spaceNeeded = 30_000_000 - 70_000_000 + usedSpace
 
       const result = fs.filter(i => i.type === 'dir')
         .map(dir => sizeOfDirectory(dir.name, fs))
-        .filter(size => 70_000_000 - usedSpace + size >= 30_000_000)
+        .filter(size => size >= spaceNeeded)
         .reduce(min)
       expect(result).to.equal(24933642)
     })
@@ -109,10 +110,11 @@ describe('Day 7: No Space Left On Device', () => {
     it('solves it', () => {
       const fs = parseCommands(input)
       const usedSpace = fs.filter(i => i.type === 'dir').map(dir => sizeOfDirectory(dir.name, fs)).reduce(max)
+      const spaceNeeded = 30_000_000 - 70_000_000 + usedSpace
 
       const result = fs.filter(i => i.type === 'dir')
         .map(dir => sizeOfDirectory(dir.name, fs))
-        .filter(size => 70_000_000 - usedSpace + size >= 30_000_000)
+        .filter(size => size >= spaceNeeded)
         .reduce(min)
       expect(result).to.equal(1623571)
     })

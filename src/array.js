@@ -4,3 +4,5 @@ export const groupBy = (groups, value, index) => (grouping) => (grouping(groups,
 export const min = (min, value) => (min < value ? min : value)
 export const max = (max, value) => (max > value ? max : value)
 
+export const range = (from, to) => Array.from({ length: to }, (_, index) => index + from)
+
