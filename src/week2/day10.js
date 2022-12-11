@@ -10,8 +10,8 @@ export const renderImagePart2 = input => {
   for (let row = 0; row < 6; row++) {
     for (let cycle = 0; cycle < 240; cycle++) {
       const value = xValueAt(cycle + 1, input)
-      const sprite = [(row * 40) + value, (row * 40) + value + 1, (row * 40) + value + 2]
-      if (sprite.includes(cycle + 1))
+      const sprite = [(row * 40) + value - 1, (row * 40) + value, (row * 40) + value + 1]
+      if (sprite.includes(cycle))
         crt[cycle] = '#'
     }
   }
