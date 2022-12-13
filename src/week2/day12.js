@@ -20,7 +20,6 @@ export const fewestSteps = (start, end, map, foundIt) => {
       if (foundIt(adjacent, start)) {
         return point.distance + 1
       } else {
-        adjacent.visited = true
         adjacent.distance = point.distance + 1
         toVisit.push(adjacent)
       }
@@ -32,7 +31,7 @@ export const adjacentsTo = (point, map) =>
   [{ x: point.x - 1, y: point.y }, { x: point.x + 1, y: point.y }, { x: point.x, y: point.y - 1 }, { x: point.x, y: point.y + 1 }]
     .map(a => map.find(point => pointsAreEqual(point, a)))
     .filter(a => a !== undefined)
-    .filter(a => !a.visited)
+    .filter(a => a.distance === 0)
     .filter(a => (point.height - a.height) < 2)
 
 const pointsAreEqual = (p1, p2) => p1.x === p2.x && p1.y === p2.y

@@ -45,7 +45,7 @@ describe('Day 12: Hill Climbing Algorithm', () => {
     })
 
     it('does not climb a point already visited', () => {
-      map.find(p => p.x === 4 && p.y === 2).visited = true
+      map.find(p => p.x === 4 && p.y === 2).distance = 1
 
       const adjacentsToEnd = adjacentsTo(end, map)
       expect(adjacentsToEnd.length).to.equal(0)
