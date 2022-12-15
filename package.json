@@ -10,6 +10,7 @@
     "mocha": "10.1.0"
   },
   "mocha": {
+    "timeout": 60000,
     "require": [
       "chai/register-expect.js"
     ]
