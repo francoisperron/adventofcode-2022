@@ -2,14 +2,14 @@ import { jet } from './jetsPattern.js'
 import { shiftRock } from './rocksPattern.js'
 
 export const tetrisRoom = (initialRocks = floor) => {
-  const rocks = new Set()
+  const rocks = {}
   let _highestRock = 0
   const newRock = (rock) => shiftRock(rock, [2, 4 + _highestRock])
   const highestRock = () => _highestRock
 
   const fallDown = rock => {
     const fellRockPosition = shiftRock(rock, [0, -1])
-    const cannotFall = fellRockPosition.some(r => rocks.has(hash(r)))
+    const cannotFall = fellRockPosition.some(r => rocks[hash(r)])
     return cannotFall ? rock : fellRockPosition
   }
 
@@ -18,21 +18,21 @@ export const tetrisRoom = (initialRocks = floor) => {
     const pushedRockPosition = shiftRock(rock, [leftOrRight, 0])
 
     const pushedIntoAWall = pushedRockPosition.some(m => m[0] < 0 || m[0] > 6)
-    const cannotPuh = pushedRockPosition.some(r => rocks.has(hash(r)))
+    const cannotPuh = pushedRockPosition.some(r => rocks[hash(r)])
 
     return pushedIntoAWall || cannotPuh ? rock : pushedRockPosition
   }
 
   const add = rock => {
     _highestRock = Math.max(_highestRock, ...rock.map(r => r[1]))
-    return rock.forEach(r => rocks.add(hash(r)))
+    return rock.forEach(r => rocks[hash(r)] = true)
   }
 
   const print = () => {
     let out = ''
     for (let i = _highestRock; i >= 0; i--) {
       for (let j = 0; j < 7; j++) {
-        out += rocks.has(hash([j, i])) ? '#' : '.'
+        out += rocks[hash([j, i])] ? '#' : '.'
       }
       out += '\n'
     }
